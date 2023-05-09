@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>latihan pemrosesan form</title>
+</head>
+<body>
+    <form method="post">
+    <p>form input nilai</p>
+    <label>nama</label>
+    <input type="text" name="nama" placeholder="masukan nama">
+    <label>mata kuliah</label>
+    <select name="matkul">
+        <option >----pilih matakuliah----</option>
+        <option value="html">HTML dan CSS</option>
+        <option value="js">javascript</option>
+        <option value="ui">UI/UX</option>
+        <option value="php">PHP</option>
+
+    </select><br>
+    <label >nilai</label>
+
+    <input type="text" name="nilai" placeholder="masukan nilai anda">
+    <button name="proses" type="submit">simpan</button>
+
+    </form>
+    <?php
+    error_reporting(0);
+
+$nama = $_POST['nama'];
+$matakuliah = $_POST['matkul'];
+$nilai = $_POST['nilai'];
+$tombol = $_POST['proses'];
+
+$keterangan = ($nilai >= 60) ? "lulus" : "gagal";
+
+if($nilai >= 85 && $nilai <= 100) $grade = "A";
+else if ($nilai >= 75 && $nilai <= 84) $grade = "B";
+else if ($nilai >= 60 && $nilai <= 74) $grade = "C";
+else if ($nilai >= 30 && $nilai <= 59) $grade = "D";
+else if ($nilai >= 0 && $nilai <= 29) $grade = "E";
+else $grade = "";
+
+switch ($grade){
+    case "A" : $predikat = "memuaskan"; break;
+    case "B" : $predikat = "bagus"; break;
+    case "C" : $predikat = "cukup"; break;
+    case "D" : $predikat = "kurang"; break;
+    case "E" : $predikat = "buruk"; break;
+    default: $predikat ="";
+}
+
+if(isset($tombol)){
+?>
+nama mahasiswa : <?= $nama ?>
+<br> matakuliah : <?= $matakuliah ?>
+<br> nilai : <?= $nilai ?>
+<br> keterangan : <?= $keterangan ?>
+<br> grade : <?= $grade ?>
+<br> predikat : <?= $predikat ?>
+
+<?php } ?>
+
+
+
+</body>
+</html>
+
+

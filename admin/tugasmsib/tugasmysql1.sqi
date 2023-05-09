@@ -1,0 +1,249 @@
+Microsoft Windows [Version 10.0.19044.2728]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\DELL>d:
+
+D:\>cd xampp
+The system cannot find the path specified.
+
+D:\>cd \Aplikasi.exe \Aplikasi.exe
+The system cannot find the path specified.
+
+D:\>cd \Aplikasi.exe\xampp\mysql\bin
+
+D:\Aplikasi.exe\xampp\mysql\bin> -u root -p
+'-u' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\Aplikasi.exe\xampp\mysql\bin>-u root -p
+'-u' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\Aplikasi.exe\xampp\mysql\bin>-u root -p
+'-u' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\Aplikasi.exe\xampp\mysql\bin>mysql -u root -p
+Enter password:
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+D:\Aplikasi.exe\xampp\mysql\bin>MYSQL -u root -p
+Enter password:
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+D:\Aplikasi.exe\xampp\mysql\bin>MYSQL -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.335 sec)
+
+MariaDB [(none)]> CREATE DATABASE dbtoko1
+    ->
+    ->
+    ->
+    -> CREATE DATABASE dbtoko1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREATE DATABASE dbtoko1' at line 5
+MariaDB [(none)]> CREATE DATABASE dbtoko1;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [(none)]> USE dbtoko1
+Database changed
+MariaDB [dbtoko1]> CREATE TABLE kartu(
+    -> id int NOT NULL auto_increment primary key,
+    -> kode varchar(10) unique,
+    -> nama varchar(30) NOT NULL,
+    -> diskon double default 0,
+    -> iuran double default 0)
+    -> ;
+Query OK, 0 rows affected (0.478 sec)
+
+MariaDB [dbtoko1]> show tables;
++-------------------+
+| Tables_in_dbtoko1 |
++-------------------+
+| kartu             |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [dbtoko1]> DESC kartu;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| kode   | varchar(10) | YES  | UNI | NULL    |                |
+| nama   | varchar(30) | NO   |     | NULL    |                |
+| diskon | double      | YES  |     | 0       |                |
+| iuran  | double      | YES  |     | 0       |                |
++--------+-------------+------+-----+---------+----------------+
+5 rows in set (0.016 sec)
+
+MariaDB [dbtoko1]> CREATE TABLE pelanggan(
+    -> id int NOT NULL auto_increment primary key,
+    -> kode varchar(10) unique,
+    -> nama varchar(30) NOT NULL,
+    -> jk char(1),
+    -> tmp_lahir varchar(20),
+    -> tgl_lahir date,
+    -> email varchar(30),
+    -> id int NOT NULL references kartu(id));
+ERROR 1060 (42S21): Duplicate column name 'id'
+MariaDB [dbtoko1]> kartu_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'kartu_id int NOT NULL references kartu(id))' at line 1
+MariaDB [dbtoko1]> id int NOT NULL auto_increment primary key,
+    -> kode varchar(10) unique,
+    -> nama varchar(30) NOT NULL,
+    -> jk char(1),
+    -> tmp_lahir varchar(20),
+    -> tgl_lahir date,
+    -> email varchar(30),
+    -> kartu_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'id int NOT NULL auto_increment primary key,
+kode varchar(10) unique,
+nama var...' at line 1
+MariaDB [dbtoko1]> CREATE TABLE pelanggan(
+    -> id int NOT NULL auto_increment primary key,
+    -> kode varchar(10) unique,
+    -> nama varchar(45),
+    -> jk char(1),
+    -> tmp_lahir varchar(20),
+    -> tgl_lahir date,
+    -> email varchar(30),
+    -> kartu_id int NOT NULL references kartu(id));
+Query OK, 0 rows affected (0.611 sec)
+
+MariaDB [dbtoko1]> show tables;
++-------------------+
+| Tables_in_dbtoko1 |
++-------------------+
+| kartu             |
+| pelanggan         |
++-------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbtoko1]> CREATE TABLE pesanan(
+    -> id int NOT NULL auto_increment primary key,
+    -> tanggal date,
+    -> total double,
+    -> pelanggan_id int NOT NULL REFERENCES pelanggan(id));
+Query OK, 0 rows affected (0.452 sec)
+
+MariaDB [dbtoko1]> show tables;
++-------------------+
+| Tables_in_dbtoko1 |
++-------------------+
+| kartu             |
+| pelanggan         |
+| pesanan           |
++-------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [dbtoko1]> CREATE TABLE produk(
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [dbtoko1]> CREATE TABLE produk
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [dbtoko1]> CREATE TABLE produk(
+    -> id int NOT NULL auto_increment primary key,
+    -> produk,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [dbtoko1]> CREATE TABLE produk(
+    -> id int NOT NULL auto_increment primary key,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+MariaDB [dbtoko1]> CREATE TABLE produk
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [dbtoko1]> CREATE TABLE produk;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [dbtoko1]> CREATE TABLE produk(
+    -> id int NOT NULL auto_increment primary key,
+    -> nama varchar(45),
+    -> produk_id int NOT NULL references kartu(id));
+Query OK, 0 rows affected (0.529 sec)
+
+MariaDB [dbtoko1]> CREATE TABLE pesanan_items(
+    -> id int NOT NULL auto_increment primary key,
+    -> no pesanan varchar(45),
+    -> pesanan_items_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'varchar(45),
+pesanan_items_id int NOT NULL references kartu(id))' at line 3
+MariaDB [dbtoko1]> CREATE TABLE pesanan_items(
+    -> id int NOT NULL auto_increment primary key,
+    -> no pesanan varchar(45),
+    -> pesanan items_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'varchar(45),
+pesanan items_id int NOT NULL references kartu(id))' at line 3
+MariaDB [dbtoko1]> CREATE TABLE pesanan items(
+    -> no pesanan varchar(45),
+    -> pesanan items_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(
+no pesanan varchar(45),
+pesanan items_id int NOT NULL references kartu(id))' at line 2
+MariaDB [dbtoko1]> CREATE TABLE pesanan-items(
+    -> no pesanan varchar(45),
+    -> pesanan-items_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-items(
+no pesanan varchar(45),
+pesanan-items_id int NOT NULL references kart...' at line 1
+MariaDB [dbtoko1]> CREATE TABLE vendor(
+    -> id int NOT NULL auto_increment primary key,
+    -> nama vendor varchar(65),
+    -> vendor_id int NOT NULL references kartu(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'varchar(65),
+vendor_id int NOT NULL references kartu(id))' at line 3
+MariaDB [dbtoko1]> show tables;
++-------------------+
+| Tables_in_dbtoko1 |
++-------------------+
+| kartu             |
+| pelanggan         |
+| pesanan           |
+| produk            |
++-------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [dbtoko1]> SELECT * dbtoko1 WHERE pelanggan
+    -> update;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dbtoko1 WHERE pelanggan
+update' at line 1
+MariaDB [dbtoko1]> use pelanggan;
+ERROR 1049 (42000): Unknown database 'pelanggan'
+MariaDB [dbtoko1]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbtoko1            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [dbtoko1]> use dbtoko1
+Database changed
+MariaDB [dbtoko1]> select*from pelanggan;
+Empty set (0.387 sec)
+
+MariaDB [dbtoko1]>
+
+
